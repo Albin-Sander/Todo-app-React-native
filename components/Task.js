@@ -8,7 +8,7 @@ const Task = (props) => (
             <Icon
             name={props.checked ? 'check' : 'square'}
             size={30}
-            color='green'
+            color='#0b74bd'
             style={{marginLeft: 15}}
             onPress={props.setChecked}
             />
@@ -19,7 +19,7 @@ const Task = (props) => (
             <Icon
             name='trash-2'
             size={30}
-            color='red'
+            color='#D23724'
             style={{marginLeft: 'auto'}}
             onPress={props.delete}
             />
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'stretch',
         minHeight: 40,
+        
     },
     task: {
         paddingBottom: 20,
@@ -48,10 +49,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         fontSize: 17,
         fontWeight: 'bold',
-        color: 'black'
+        color: '#f0f0f0'
     },
     verticalLine: {
-        borderBottomColor: 'black',
+        borderBottomColor: '#f0f0f0',
         borderBottomWidth: 4,
         marginLeft: 10,
         width: '100%',
