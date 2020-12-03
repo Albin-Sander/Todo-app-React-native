@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity, ImageBackground, } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity, Alert, } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import Task from './components/Task.js';
@@ -11,15 +11,36 @@ import Task from './components/Task.js';
 
 
 const App = () => {
+  const createTwoButtonAlert = () =>
+    Alert.alert(
+      "More than 5 todos",
+      "Sorry you have more than 5 todos, try and complete them before adding more!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+
   const [value, setValue] = useState('')
   const [todos, setTodos] = useState([])
   
+  //Börja här
   function handleAddTodo() {
-    if (value.length > 0) {
+     if (todos.length > 4) {
+      console.log("Error")
+      createTwoButtonAlert()
+}
+    else if (value.length > 0) {
       setTodos([...todos, { text: value, key: Date.now(), checked: false}])
         setValue('')
+        
+        
     }
+    
+    
   }
+
+  
 
   function handleDeleteTodo(id) {
     setTodos( todos.filter((todo) => {
@@ -50,6 +71,7 @@ const App = () => {
         <Icon name='plus' size={30} color='#900' style={{marginLeft: 15}}/>
       </TouchableOpacity>
       
+      
       <StatusBar style="auto" />
     </View>
     <ScrollView style={{width: '100%'}}>
@@ -72,13 +94,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#ffffff'
   },
   textInput: {
     height: 20,
     flex: 1,
     minHeight: '7%',
-    marginTop: '15%',
+    marginTop: '40%',
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
@@ -90,7 +112,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(222,222,222)',
     borderBottomWidth: 1,
     paddingRight: 10,
-    paddingBottom: 5
+    paddingBottom: 5,
+    
   }
 });
 
