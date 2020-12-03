@@ -20,7 +20,7 @@ const Task = (props) => (
             name='trash-2'
             size={30}
             color='#D23724'
-            style={{marginLeft: 'auto'}}
+            style={{marginLeft: 'auto', marginRight: 10}}
             onPress={props.delete}
             />
         </View>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'stretch',
         minHeight: 40,
+        
         
     },
     task: {

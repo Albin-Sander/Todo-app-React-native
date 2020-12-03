@@ -124,7 +124,7 @@ const App = () => {
   }
   return (
     <View style={styles.container}>
-      <Text style={{marginTop: 70, fontSize: 25, color: '#f0f0f0'}}>Welcome, you have {todos.length} todos</Text>
+      <Text style={{marginTop: 125, fontSize: 25, color: '#f0f0f0'}}>Welcome, you have {todos.length} todos</Text>
     <View style={styles.textInputContainer}>
       
       <TextInput
