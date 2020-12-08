@@ -134,6 +134,8 @@ const App = () => {
         placeholder={'Add todo'}
         value={value}
         placeholderTextColor={'#c2c2c2'}
+        textBreakStrategy={'simple'}
+        
         
       />
       <TouchableOpacity
@@ -175,7 +177,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: '#f0f0f0',
-    paddingLeft: 10
+    paddingLeft: 10,
+    fontFamily: 'arial'
   },
   textInputContainer: {
     flexDirection: 'row',
