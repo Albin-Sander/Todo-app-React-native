@@ -1,12 +1,17 @@
 {
-  "name": "Todo",
-  "displayName": "Todo",
   "expo": {
-    "name": "Todo",
-    "slug": "Todo",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+   "name": "5 Todos",
+   "icon": "/Users/albin/Developer/react-native/Todo/images/appstore.png",
+   "version": "1.0.0",
+   "slug": "5-todos",
+   "ios": {
+     "bundleIdentifier": "com.sander.5todos",
+     "buildNumber": "1.0.0"
+   },
+   "android": {
+     "package": "com.sander.fivetodos",
+     "versionCode": 1,
+     "permissions": []
+   }
   }
 }
