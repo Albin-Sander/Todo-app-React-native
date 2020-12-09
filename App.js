@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity, Alert, } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity, Alert, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import Task from './components/Task.js';
+import Settings from './components/Settings'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 
 
-
-
-const App = () => {
+function HomeScreen() {
   const createTwoButtonAlert = () =>
     Alert.alert(
       "More than 5 todos",
@@ -124,8 +126,22 @@ const App = () => {
   }
   return (
     <View style={styles.container}>
+      
       <Text style={{marginTop: 125, fontSize: 25, color: '#f0f0f0'}}>Welcome, you have {todos.length} todos</Text>
-    <View style={styles.textInputContainer}>
+      
+      <ScrollView style={{width: '100%', marginTop: 60}}>
+        {todos.map((task) => (
+          <Task
+          text={task.text}
+          key={task.key}
+          checked={task.checked}
+          setChecked={() => handleChecked(task.key)}
+          delete={() => handleDeleteTodo(task.key)}
+          />
+        ))}
+      </ScrollView>
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.textInputContainer}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       
       <TextInput
       style={styles.textInput}
@@ -138,6 +154,7 @@ const App = () => {
         
         
       />
+      </TouchableWithoutFeedback>
       <TouchableOpacity
       onPress={() => handleAddTodo()}
       >
@@ -146,20 +163,61 @@ const App = () => {
       
       
       <StatusBar style="auto" />
+      
+    </KeyboardAvoidingView>
+    
+    
+    
     </View>
-    <ScrollView style={{width: '100%'}}>
-        {todos.map((task) => (
-          <Task
-          text={task.text}
-          key={task.key}
-          checked={task.checked}
-          setChecked={() => handleChecked(task.key)}
-          delete={() => handleDeleteTodo(task.key)}
-          />
-        ))}
-      </ScrollView>
+    
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
     </View>
   );
+}
+
+const Tab = createBottomTabNavigator();
+
+
+
+const App = () => {
+  return(
+    <NavigationContainer >
+    <Tab.Navigator 
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'ios-home'
+              : 'ios-home';
+          } else if (route.name === 'Settings') {
+            iconName = focused ? 'ios-settings' : 'ios-settings';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#0b74bd',
+        inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: '#212121'
+        }
+      }}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={Settings} />
+    </Tab.Navigator>
+  </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -178,15 +236,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#f0f0f0',
     paddingLeft: 10,
-    fontFamily: 'arial'
+    
+    
   },
   textInputContainer: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    borderColor: 'rgb(222,222,222)',
-    borderBottomWidth: 1,
     paddingRight: 10,
     paddingBottom: 5,
+    marginBottom: 60,
+    borderColor: 'rgb(222,222,222)',
+    borderBottomWidth: 1,
+    
+    
+    
+    
     
   }
 });

@@ -6,23 +6,30 @@ const Task = (props) => (
     
         <View style={styles.taskWrapper}>
             <Icon
+            name='square'
+            size={30}
+            color='#0b74bd'
+            style={{marginLeft: 15}}
+            onPress={props.delete}
+            />
+            {/* <Icon
             name={props.checked ? 'check' : 'square'}
             size={30}
             color='#0b74bd'
             style={{marginLeft: 15}}
             onPress={props.setChecked}
-            />
+            /> */}
             <View>
                 {props.checked && <View styles={styles.verticalLine}></View>}
                 <Text style={styles.task}>{props.text}</Text>
             </View>
-            <Icon
-            name='trash-2'
+            {/* <Icon
+            name='square'
             size={30}
             color='#D23724'
             style={{marginLeft: 'auto', marginRight: 10}}
             onPress={props.delete}
-            />
+            /> */}
         </View>
     
 )
