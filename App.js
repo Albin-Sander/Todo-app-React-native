@@ -140,9 +140,9 @@ function HomeScreen() {
           />
         ))}
       </ScrollView>
-    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.textInputContainer}>
+    <KeyboardAvoidingView behavior={Platform.OS == "ios"  ? "padding" : "height"} behavior={Platform.OS == "android"  ? "padding" : "height"} style={styles.textInputContainer}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      
+      <ScrollView>
       <TextInput
       style={styles.textInput}
         multiline={true}
@@ -154,6 +154,7 @@ function HomeScreen() {
         
         
       />
+      </ScrollView>
       </TouchableWithoutFeedback>
       <TouchableOpacity
       onPress={() => handleAddTodo()}
@@ -228,14 +229,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#212121'
   },
   textInput: {
-    height: 20,
+    height: 30,
     flex: 1,
-    minHeight: '7%',
+    minHeight: '5%',
     marginTop: '40%',
     fontSize: 25,
-    fontWeight: 'bold',
     color: '#f0f0f0',
     paddingLeft: 10,
+    
     
     
   },
@@ -247,6 +248,7 @@ const styles = StyleSheet.create({
     marginBottom: 60,
     borderColor: 'rgb(222,222,222)',
     borderBottomWidth: 1,
+
     
     
     
